@@ -7,7 +7,7 @@
  <div align="center"><a title="" href="https://github.com/zjykzj/scikit-learn"><img align="center" src="./imgs/scikit-learn.png"></a></div>
 
 <p align="center">
-  «scikit-learn» saves some demo for <a href='https://github.com/scikit-learn/scikit-learn'>scikit-learning</a> samples
+  «scikit-learn» saves some demo for <a href='https://github.com/scikit-learn/scikit-learn'>scikit-learn</a> samples
 <br>
 <br>
   <a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square"></a>
