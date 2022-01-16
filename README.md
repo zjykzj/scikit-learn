@@ -19,8 +19,6 @@
 
 - [Table of Contents](#table-of-contents)
 - [Background](#background)
-- [Installation](#installation)
-- [Usage](#usage)
 - [Maintainers](#maintainers)
 - [Thanks](#thanks)
 - [Contributing](#contributing)
