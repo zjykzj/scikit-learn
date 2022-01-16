@@ -66,27 +66,32 @@ def score(y_pred, y_test):
     print('y_test[:10]:', y_test[:10])
 
     # 计算准确率
+    # accuracy
     acc = accuracy_score(y_test, y_pred)
     acc_num = accuracy_score(y_test, y_pred, normalize=False)
     print('acc:', acc, ' acc_num:', acc_num)
 
     # 计算精度
+    # precision
     precision_macro = precision_score(y_test, y_pred, average='macro')
     precision_micro = precision_score(y_test, y_pred, average='micro')
     print('precision_macro:', precision_macro, ' precision_micro:', precision_micro)
 
     # 计算召回率
+    # recall
     recall_macro = recall_score(y_test, y_pred, average='macro')
     recall_micro = recall_score(y_test, y_pred, average='micro')
     print('recall_macro:', recall_macro, ' recall_micro:', recall_micro)
 
     # 混淆矩阵
+    # confusion matrix
     cm = confusion_matrix(y_test, y_pred, labels=[0, 1], normalize=None)
     print(cm)
     tn, fp, fn, tp = cm.ravel()
     print('tn: {}, fp: {}, fn: {}, tp: {}'.format(tn, fp, fn, tp))
 
     # 显示混淆矩阵
+    # show confusion matrix
     disp = ConfusionMatrixDisplay(confusion_matrix=cm)
     disp.plot()
     plt.show()
@@ -98,23 +103,27 @@ def score_roc(y_pred, y_test):
     print('y_test[:10]:', y_test[:10])
 
     # 计算ROC曲线
+    # ROC curve
     fpr, tpr, thresholds = roc_curve(y_test, y_pred, pos_label=1)
     print('tpr: {}'.format(tpr))
     print('fpr: {}'.format(fpr))
     print('thresholds: {}'.format(thresholds))
 
     # 计算ROC曲线下面积
+    # the area under ROC curve
     auc_score = roc_auc_score(y_test, y_pred, average="macro", multi_class='ovo')
     roc_auc = auc(fpr, tpr)
     print('auc:', auc_score, ' roc_auc:', roc_auc)
 
     # 显示ROC曲线
+    # show ROC curve
     display = RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc,
                               estimator_name='example estimator')
     display.plot()
     plt.show()
 
     # 计算最佳阈值
+    # compute best threshold
     thresh = thresholds[np.argmax(tpr - fpr)]
     print('thresh:', thresh)
 
@@ -127,16 +136,19 @@ def score_pr(y_pred, y_test):
     print('y_test[:10]:', y_test[:10])
 
     # 计算PR曲线
+    # PR curve
     precision, recall, thresholds = precision_recall_curve(y_test, y_pred, pos_label=1)
     print('precision: {}'.format(precision))
     print('recall: {}'.format(recall))
     print('thresholds: {}'.format(thresholds))
 
     # 计算PR曲线下面积
+    # the area under PR curve
     average_precision = average_precision_score(y_test, y_pred, average="macro", pos_label=1)
     print('average_precision:', average_precision)
 
     # 显示PR曲线
+    # show PR curve
     import matplotlib.pyplot as plt
     display = PrecisionRecallDisplay(precision, recall,
                                      estimator_name='example estimator')
@@ -144,6 +156,7 @@ def score_pr(y_pred, y_test):
     plt.show()
 
     # 计算最佳阈值
+    # best threshold
     thresh = thresholds[np.argmax(precision + recall)]
     print('thresh:', thresh)
 
@@ -153,6 +166,7 @@ def score_pr(y_pred, y_test):
 def process_roc(y_pred_prob, y_test):
     thresh = score_roc(y_pred_prob[:, 1], y_test)
     # 获取最佳阈值后重新设置
+    # Reset after obtaining the optimal threshold
     y_pred_new = y_pred_prob[:, 1] >= thresh
     assert isinstance(y_pred_new, np.ndarray)
     y_pred_new = y_pred_new.astype(int)
@@ -162,6 +176,7 @@ def process_roc(y_pred_prob, y_test):
 def process_pr(y_pred_prob, y_test):
     thresh = score_pr(y_pred_prob[:, 1], y_test)
     # 选择最佳阈值进行操作
+    # Reset after obtaining the optimal threshold
     y_pred_new = y_pred_prob[:, 1] >= thresh
     assert isinstance(y_pred_new, np.ndarray)
     y_pred_new = y_pred_new.astype(int)
