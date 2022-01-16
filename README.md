@@ -30,14 +30,6 @@
 
 [scikit-learn](https://scikit-learn.org/stable/) provides many practical and efficiently machine learning related implementation. This repos saves some demo for [scikit-learn](https://scikit-learn.org/stable/) samples for quick reference.
 
-## Installation
-
-...
-
-## Usage
-
-...
-
 ## Maintainers
 
 * zhujian - *Initial work* - [zjykzj](https://github.com/zjykzj)
